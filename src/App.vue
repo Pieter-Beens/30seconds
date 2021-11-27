@@ -1,29 +1,36 @@
 <template v-if="enabled">
   <div class="container">
     <div class="row">
-      <div class="col-2">
+      <div class="col-md-2">
+        <div class="row">
         <select v-model="this.selectedSheet" @change="changedYear()">
           <option v-for="sheetTitle in sheetTitles" v-bind:key="sheetTitle" v-bind:value="sheetTitle">
             {{ sheetTitle }}
           </option>
         </select>
       </div>
-
-      <div class="col-2">
+      
+      <div class="row chapters">
         <div v-for="(chapterTitle, index) in chapterTitles" v-bind:key="chapterTitle">
           <label>{{chapterTitle}}</label>
           <input type="checkbox" v-model="this.selectedColumns" v-bind:value="index" @change="changedChapters()" />
         </div>
       </div>
+      
 
-      <div class="col-8">
+    <div class="row">
         <button class="duolingo-button" role="button" @click="handleClick()">
           <span>Genereer kaartje</span>
         </button>
+    </div>
+      </div>
+  
+      <div class="col-md-10">
+     
         <Kaartje :concepts="this.randomConcepts" />
       </div>
     </div>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -178,5 +185,14 @@ export default {
 
 .duolingo-button:disabled {
   cursor: auto;
+}
+
+.row.kaartje{
+  margin: auto;
+}
+
+.row.chapters{
+  min-height: 70%;
+
 }
 </style>
