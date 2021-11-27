@@ -1,20 +1,29 @@
 <template v-if="enabled">
-  <select v-model="this.selectedSheet" @change="changedYear()">
-    <option v-for="sheetTitle in sheetTitles" v-bind:key="sheetTitle" v-bind:value="sheetTitle">
-      {{ sheetTitle }}
-    </option>
-  </select>
+  <div class="container">
+    <div class="row">
+      <div class="col-2">
+        <select v-model="this.selectedSheet" @change="changedYear()">
+          <option v-for="sheetTitle in sheetTitles" v-bind:key="sheetTitle" v-bind:value="sheetTitle">
+            {{ sheetTitle }}
+          </option>
+        </select>
+      </div>
 
-  <div v-for="(chapterTitle, index) in chapterTitles" v-bind:key="chapterTitle">
-    <label>{{chapterTitle}}</label>
-    <input type="checkbox" v-model="this.selectedColumns" v-bind:value="index" @change="changedChapters()" />
+      <div class="col-2">
+        <div v-for="(chapterTitle, index) in chapterTitles" v-bind:key="chapterTitle">
+          <label>{{chapterTitle}}</label>
+          <input type="checkbox" v-model="this.selectedColumns" v-bind:value="index" @change="changedChapters()" />
+        </div>
+      </div>
+
+      <div class="col-8">
+        <button class="duolingo-button" role="button" @click="handleClick()">
+          <span>Genereer kaartje</span>
+        </button>
+        <Kaartje :concepts="this.randomConcepts" />
+      </div>
+    </div>
   </div>
-
-  <button id=button1 @click="handleClick()">
-    <span>Genereer kaartje</span>
-  </button>
-  <p>test var: {{ this.glossary }}</p>
-  <Kaartje :concepts="this.randomConcepts" />
 </template>
 
 <script>
@@ -110,5 +119,64 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.duolingo-button {
+  appearance: button;
+  background-color: #1899D6;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: din-round,sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 13px 16px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 250px;
+}
+
+.duolingo-button:after {
+  background-clip: padding-box;
+  background-color: #1CB0F6;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.duolingo-button:main,
+.duolingo-button:focus {
+  user-select: auto;
+}
+
+.duolingo-button:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+
+.duolingo-button:disabled {
+  cursor: auto;
 }
 </style>
