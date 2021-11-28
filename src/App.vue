@@ -30,6 +30,7 @@
             <span>Genereer kaartje</span>
           </button>
         </div>
+        
       <div class="p-3 col-sm-9">
         <Kaartje ref="kaartje" :concepts="this.randomConcepts" @revealed="startTimer()" />
         <Timer ref="timer" :timeAlotted="this.timerSetting" :running="this.timerIsRunning" />
@@ -153,7 +154,7 @@ export default {
   border-style: solid;
   border-width: 2px;
   width: 100%;
-  padding-bottom: 30px;
+  padding-bottom: 80px;
 }
 
 .duolingo-button {
