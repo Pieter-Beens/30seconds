@@ -3,8 +3,8 @@
     <div class="row">
 
       <div class="col-sm-3" id="menu">
-        
-          <i>Kies hier je jaar</i>
+        <br>
+          <i>Kies hier je jaar </i>
           <select v-model="this.selectedSheet" @change="changedYear()">
             <option v-for="sheetTitle in sheetTitles" v-bind:key="sheetTitle" v-bind:value="sheetTitle">
               {{ sheetTitle }}
@@ -12,10 +12,11 @@
           </select>
         
           <div class="w-100"></div>
-        
+        <div class="chapters">
           <div v-for="(chapterTitle, index) in chapterTitles" v-bind:key="chapterTitle">
             <label>{{chapterTitle}}</label>
             <input type="checkbox" v-model="this.selectedColumns" v-bind:value="index" @change="changedChapters()" />
+          </div>
           </div>
           
           <div class="w-100"></div>
@@ -24,7 +25,7 @@
           <label>sec per ronde</label>
 
           <div class="w-100"></div>
-
+          <br>
           <button class="duolingo-button" role="button" @click="handleClick()">
             <span>Genereer kaartje</span>
           </button>
@@ -216,7 +217,7 @@ export default {
 
 
 
-.row.chapters{
+.chapters{
   min-height: 70%;
 }
 </style>
