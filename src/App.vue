@@ -1,49 +1,55 @@
 <template v-if="enabled">
   <div class="container">
     <div class="row">
-      <div class="col-md-2">
+      <div class="col-md-3" id="menu">
         <div class="row">
-        <select v-model="this.selectedSheet" @change="changedYear()">
-          <option v-for="sheetTitle in sheetTitles" v-bind:key="sheetTitle" v-bind:value="sheetTitle">
-            {{ sheetTitle }}
-          </option>
-        </select>
-      </div>
-      
-      <div class="row chapters">
-        <div v-for="(chapterTitle, index) in chapterTitles" v-bind:key="chapterTitle">
-          <label>{{chapterTitle}}</label>
-          <input type="checkbox" v-model="this.selectedColumns" v-bind:value="index" @change="changedChapters()" />
+          <i>Kies hier je jaar</i>
+          <select v-model="this.selectedSheet" @change="changedYear()">
+            <option v-for="sheetTitle in sheetTitles" v-bind:key="sheetTitle" v-bind:value="sheetTitle">
+              {{ sheetTitle }}
+            </option>
+          </select>
+        </div>
+        
+        <div class="row chapters">
+          <div v-for="(chapterTitle, index) in chapterTitles" v-bind:key="chapterTitle">
+            <label>{{chapterTitle}}</label>
+            <input type="checkbox" v-model="this.selectedColumns" v-bind:value="index" @change="changedChapters()" />
+          </div>
+        </div>
+        
+        <div class="row">
+          <input type="number" v-model="this.timeSetting" step=5 min=5 max=60 style="width:44px;">
+          <label>sec per ronde</label>
+
+          <button class="duolingo-button" role="button" @click="handleClick()">
+            <span>Genereer kaartje</span>
+          </button>
         </div>
       </div>
-      
-
-    <div class="row">
-        <button class="duolingo-button" role="button" @click="handleClick()">
-          <span>Genereer kaartje</span>
-        </button>
-    </div>
-      </div>
   
-      <div class="col-md-10">
-     
+      <div class="col-md-9">
         <Kaartje :concepts="this.randomConcepts" />
+        <Timer ref="timer" :timeAlotted="this.timeSetting" />
       </div>
     </div>
-    </div>
+  </div>
 </template>
 
 <script>
 // https://medium.com/@hiddendreamz7/deploy-vue-js-site-an-easy-approach-dcfe3c2e166d
 
 import Kaartje from './components/Kaartje.vue'
+import Timer from './components/Timer.vue'
+
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 const doc = new GoogleSpreadsheet('1zoyOkAtnoJKZ3SZgqLUBpq0Ci56NmK9KiimEisHsbAU');
 
 export default {
   name: 'App',
   components: {
-    Kaartje
+    Kaartje,
+    Timer
   },
   data(){
     return {
@@ -57,7 +63,8 @@ export default {
       glossary: [],
       randomConcepts: [],
       chaptersChangedSinceLastQuery: false,
-      roundCounter: 0
+      roundCounter: 0,
+      timeSetting: 30
     }
   },
   methods: {
@@ -77,6 +84,7 @@ export default {
       if (this.chaptersChangedSinceLastQuery) this.loadGlossary();
 
       this.randomizeNextCard();
+      this.$refs.timer.resetTimer();
     },
     changedChapters() {
       this.chaptersChangedSinceLastQuery = true;
@@ -128,9 +136,16 @@ export default {
   margin-top: 60px;
 }
 
+#menu {
+  background-color: lightgray;
+  border-style: solid;
+  border-width: 2px;
+  width: 100%;
+}
+
 .duolingo-button {
   appearance: button;
-  background-color: #1899D6;
+  background-color: #268600;
   border: solid transparent;
   border-radius: 16px;
   border-width: 0 0 4px;
@@ -156,12 +171,12 @@ export default {
   -webkit-user-select: none;
   vertical-align: middle;
   white-space: nowrap;
-  width: 250px;
+  width: 100%;
 }
 
 .duolingo-button:after {
   background-clip: padding-box;
-  background-color: #1CB0F6;
+  background-color: #00c90a;
   border: solid transparent;
   border-radius: 16px;
   border-width: 0 0 4px;
@@ -193,6 +208,5 @@ export default {
 
 .row.chapters{
   min-height: 70%;
-
 }
 </style>

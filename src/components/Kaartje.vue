@@ -36,11 +36,11 @@ img{
 }
 #textContainer {
   position: absolute;
-        z-index: 999;
-        margin: 0 auto;
-        left: 0;
-        right: 0;
-        top: 25%;
-        width: 60%;
+  z-index: 999;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: 25%;
+  width: 60%;
 }
 </style>
