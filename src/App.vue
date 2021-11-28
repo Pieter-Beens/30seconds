@@ -2,39 +2,40 @@
   <div class="container-fluid">
     <div class="row">
 
-      <div class="col-md-3" id="menu">
-        <div class="row">
+      <div class="col-sm-3" id="menu">
+        
           <i>Kies hier je jaar</i>
           <select v-model="this.selectedSheet" @change="changedYear()">
             <option v-for="sheetTitle in sheetTitles" v-bind:key="sheetTitle" v-bind:value="sheetTitle">
               {{ sheetTitle }}
             </option>
           </select>
-        </div>
         
-        <div class="row chapters">
+          <div class="w-100"></div>
+        
           <div v-for="(chapterTitle, index) in chapterTitles" v-bind:key="chapterTitle">
             <label>{{chapterTitle}}</label>
             <input type="checkbox" v-model="this.selectedColumns" v-bind:value="index" @change="changedChapters()" />
           </div>
-        </div>
-        
-        <div class="row">
+          
+          <div class="w-100"></div>
+
           <input type="number" v-model="this.timerSetting" step=5 min=5 max=60 style="width:44px;">
           <label>sec per ronde</label>
+
+          <div class="w-100"></div>
 
           <button class="duolingo-button" role="button" @click="handleClick()">
             <span>Genereer kaartje</span>
           </button>
         </div>
-      </div>
-  
-      <div class="col-md-9">
+      <div class="p-3 col-sm-9">
         <Kaartje ref="kaartje" :concepts="this.randomConcepts" @revealed="startTimer()" />
         <Timer ref="timer" :timeAlotted="this.timerSetting" :running="this.timerIsRunning" />
       </div>
     </div>
-  </div>
+    </div>
+  
 </template>
 
 <script>
@@ -151,6 +152,7 @@ export default {
   border-style: solid;
   border-width: 2px;
   width: 100%;
+  padding-bottom: 30px;
 }
 
 .duolingo-button {
