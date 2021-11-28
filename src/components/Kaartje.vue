@@ -1,7 +1,7 @@
 <template>
-  <div class="kaartje container-fluid">
+  <div class="kaartje">
     
-    <img class="w-100 img-fluid" src="./../assets/kaartje.jpg" />
+    <img class=" img-fluid" src="./../assets/kaartje.jpg" />
     <div id="textContainer">
       <p v-for="concept in concepts" v-bind:key="concept">
         {{ concept.toUpperCase() }}
@@ -21,24 +21,26 @@ export default {
 
 <style scoped>
 p {
-  margin-left: 50%;
-  font-size: 2.5vw;
+  font-size: 3vw;
   font: arial;
   font-weight: bold;
 }
 .kaartje {
+  position: relative;
   max-width: 750px;
   text-align: left;
   margin: auto;
 }
 
 img-fluid{
-  max-width: 100%;
+  max-width: 70%;
 }
 
 #textContainer {
   position: absolute;
-  
-  margin: auto;
+  z-index: 999;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>
