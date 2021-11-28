@@ -20,7 +20,7 @@
         </div>
         
         <div class="row">
-          <input type="number" v-model="this.timeSetting" step=5 min=5 max=60 style="width:44px;">
+          <input type="number" v-model="this.timerSetting" step=5 min=5 max=60 style="width:44px;">
           <label>sec per ronde</label>
 
           <button class="duolingo-button" role="button" @click="handleClick()">
@@ -30,8 +30,8 @@
       </div>
   
       <div class="col-md-9">
-        <Kaartje :concepts="this.randomConcepts" />
-        <Timer ref="timer" :timeAlotted="this.timeSetting" />
+        <Kaartje ref="kaartje" :concepts="this.randomConcepts" @revealed="startTimer()" />
+        <Timer ref="timer" :timeAlotted="this.timerSetting" :running="this.timerIsRunning" />
       </div>
     </div>
   </div>
@@ -52,6 +52,9 @@ export default {
     Kaartje,
     Timer
   },
+  emits: [
+    'resetTimer'
+  ],
   data(){
     return {
       docTitle: "",
@@ -65,7 +68,8 @@ export default {
       randomConcepts: [],
       chaptersChangedSinceLastQuery: false,
       roundCounter: 0,
-      timeSetting: 30
+      timerSetting: 30,
+      timerIsRunning: false
     }
   },
   methods: {
@@ -86,10 +90,15 @@ export default {
 
       this.randomizeNextCard();
       this.$refs.timer.resetTimer();
+      this.$refs.kaartje.revealed = false;
     },
     changedChapters() {
       this.chaptersChangedSinceLastQuery = true;
       this.roundCounter = 0;
+    },
+    startTimer() {
+      this.timerIsRunning = true;
+      console.log('App.resetTimer called successfully');
     },
     loadGlossary() {
       let itemPool = [];

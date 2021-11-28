@@ -13,7 +13,8 @@ export default {
   name: 'Timer',
   components: { Hourglass },
   props: {
-    timeAlotted: Number
+    timeAlotted: Number,
+    running: Boolean
   },
   data: function() {
     return {
@@ -25,10 +26,11 @@ export default {
   },
   methods: {
     decrementTimer() {
-        if (this.timeRemaining > 0) this.timeRemaining--;
+        if (this.timeRemaining > 0 && this.running) this.timeRemaining--;
     },
     resetTimer() {
         this.timeRemaining = this.timeAlotted + 0;
+        console.log('Timer.resetTimer called successfully');
     }
   }
 }
