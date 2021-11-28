@@ -1,7 +1,7 @@
 <template>
   <div class="kaartje container-fluid">
-    <figure>
-    <img class="w-100 img-fluid" src="./../assets/kaartje.jpg" /></figure>
+    
+    <img class="w-100 img-fluid" src="./../assets/kaartje.jpg" />
     <div id="textContainer">
       <p v-for="concept in concepts" v-bind:key="concept">
         {{ concept.toUpperCase() }}
