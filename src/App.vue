@@ -23,9 +23,8 @@
           <input type="number" v-model="this.timeSetting" step=5 min=5 max=60 style="width:44px;">
           <label>sec per ronde</label>
 
-          <span>Genereer kaartje</span>
-        </button>
-    </div>
+          <button class="duolingo-button" role="button" @click="handleClick()">
+            <span>Genereer kaartje</span>
           </button>
         </div>
       </div>
