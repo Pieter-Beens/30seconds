@@ -1,7 +1,7 @@
 <template v-if="enabled">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-md-2">
+      <div class="col-2">
         <div class="row">
         <select v-model="this.selectedSheet" @change="changedYear()">
           <option v-for="sheetTitle in sheetTitles" v-bind:key="sheetTitle" v-bind:value="sheetTitle">
@@ -25,7 +25,7 @@
     </div>
       </div>
   
-      <div class="col-md-10">
+      <div class="col-md-auto">
      
         <Kaartje :concepts="this.randomConcepts" />
       </div>
@@ -187,9 +187,7 @@ export default {
   cursor: auto;
 }
 
-.row.kaartje{
-  margin: auto;
-}
+
 
 .row.chapters{
   min-height: 70%;
