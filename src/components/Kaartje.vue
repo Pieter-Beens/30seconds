@@ -1,7 +1,15 @@
 <template>
   <div class="kaartje" @click="reveal()">
-    <img class="img-fluid" v-if="!this.revealed" src="./../assets/kaartje_back.jpg" />
-    <img class="img-fluid" v-if="this.revealed" src="./../assets/kaartje_front.jpg" />
+    <img
+      class="img-fluid"
+      v-if="!this.revealed"
+      src="./../assets/kaartje_back.jpg"
+    />
+    <img
+      class="img-fluid"
+      v-if="this.revealed"
+      src="./../assets/kaartje_front.jpg"
+    />
     <div id="textContainer" v-if="this.revealed">
       <p v-for="concept in concepts" v-bind:key="concept">
         {{ concept.toUpperCase() }}
@@ -14,19 +22,19 @@
 export default {
   name: "Kaartje",
   props: {
-    concepts: []
+    concepts: [],
   },
-  data: function() {
+  data: function () {
     return {
-      revealed: false
-    }
+      revealed: false,
+    };
   },
   methods: {
     reveal() {
       this.revealed = true;
-      this.$emit('revealed');
-    }
-  }
+      this.$emit("revealed");
+    },
+  },
 };
 </script>
 
@@ -41,9 +49,11 @@ p {
   max-width: 750px;
   text-align: left;
   margin: auto;
+  -webkit-box-shadow: 5px 5px 3px -1px rgba(0, 0, 0, 0.5);
+  box-shadow: 5px 5px 3px -1px rgba(0, 0, 0, 0.5);
 }
 
-img-fluid{
+img-fluid {
   max-width: 70%;
 }
 
